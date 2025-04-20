@@ -46,5 +46,5 @@ app.post('/upload', upload.single('file'), (req, res) => {
 });
 
 app.listen(3000, () => {
-  console.log('Server running at http://${{ secrets.EC2_PUBLIC_IP }}:3000');
+  console.log('Server running at http://localhost:3000');
 }); // test deploy
