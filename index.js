@@ -23,7 +23,7 @@ app.get('/', async (req, res) => {
     const data = await s3.listObjectsV2(params).promise();
     res.render('index', { files: data.Contents });
   } catch (err) {
-    res.send("Error listing files: " + err);
+    res.send('Error listing files: ' + err);
   }
 });
 
@@ -39,12 +39,12 @@ app.post('/upload', upload.single('file'), (req, res) => {
   s3.upload(params, (err, data) => {
     fs.unlinkSync(req.file.path); // hapus file lokal setelah upload
     if (err) {
-      return res.send("Upload gagal: " + err);
+      return res.send('Upload gagal: ' + err);
     }
     res.redirect('/');
   });
 });
 
 app.listen(3000, () => {
-  console.log('Server running at http://localhost:3000');
-});// test deploy
+  console.log('Server running at http://${{ secrets.EC2_PUBLIC_IP }}:3000');
+}); // test deploy
